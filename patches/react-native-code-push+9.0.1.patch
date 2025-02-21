@@ -1,0 +1,11 @@
+diff --git a/node_modules/react-native-code-push/android/build.gradle b/node_modules/react-native-code-push/android/build.gradle
+index 31a5248..5c3b712 100644
+--- a/node_modules/react-native-code-push/android/build.gradle
++++ b/node_modules/react-native-code-push/android/build.gradle
+@@ -1,5 +1,5 @@
+ // Top-level build file where you can add configuration options common to all sub-projects/modules.
+-
++apply plugin: 'com.android.library'
+ buildscript {
+     repositories {
+         google()
