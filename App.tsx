@@ -1,6 +1,7 @@
-import React from 'react';
-import { Text,  StyleSheet, View } from 'react-native';
+import React, { useEffect } from 'react';
+import { Text,  StyleSheet, View, Platform } from 'react-native';
 import Layout from './src/components/Layout';
+import SplashScreen from 'react-native-splash-screen';
 // import Layout from "./Layout";
 
 const HeaderComponent = () => <Text style={styles.headerText}>Header</Text>;
@@ -12,11 +13,16 @@ const ContentComponent = () => (
   </View>
 );
 
-const App = () => (
+const App = () => {
+  useEffect(() => {
+    if (Platform.OS === 'android') {
+    SplashScreen.hide();
+  }  }, []);
+  return(
   <Layout header={<HeaderComponent />} footer={<FooterComponent />}>
     <ContentComponent />
   </Layout>
-);
+)};
 
 const styles = StyleSheet.create({
   headerText: {
