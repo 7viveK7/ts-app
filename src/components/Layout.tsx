@@ -1,54 +1,54 @@
-import React from 'react';
-import { View,StatusBar, StyleSheet, SafeAreaView, useWindowDimensions } from 'react-native';
-// import { StatusBar } from "expo-status-bar";
+import React, { memo } from 'react';
+import { View, StatusBar, StyleSheet } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-const Layout = ({ header=null, footer=null, children }) => {
-  const { height } = useWindowDimensions();
-
-  return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar  />
-
-      {/* Header */}
-      <View style={styles.header}>
-        {header}
-      </View>
-
-      {/* Content */}
-      <View style={styles.content}>
-        {children}
-      </View>
-
-      {/* Footer */}
-      <View style={styles.footer}>
-        {footer}
-      </View>
-    </SafeAreaView>
-  );
+// Define constants
+const COLORS = {
+  gradientStart: '#7CB9E8',
+  gradientEnd: '#0077BE',
+  background: '#151718',
 };
 
 const styles = StyleSheet.create({
-  container: {
+  layout: {
     flex: 1,
-    backgroundColor: '#151718', // Dark theme background
+   
   },
-  header: {
-    height: 52, // Fixed height for header
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#0a7ea4',
-  },
-  content: {
-    flex: 1, // Takes up remaining space
-    backgroundColor: '#fff',
-    padding: 16,
-  },
-  footer: {
-    height: 65, // Fixed height for footer
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#0a7ea4',
+  gradient: {
+    flex: 1,
   },
 });
 
-export default Layout;
+const Layout = ({ children }) => {
+  const insets = useSafeAreaInsets();
+
+  return (
+    <LinearGradient
+      colors={[COLORS.gradientStart, COLORS.gradientEnd]}
+      style={styles.gradient}
+    // useAngle={true}
+    // angle={135}
+    >
+      <View
+        style={[
+          styles.layout,
+          {
+            // paddingTop: insets.top,
+            // paddingBottom: insets.bottom,
+
+          },
+        ]}
+      >
+        <StatusBar
+          barStyle="light-content"
+          backgroundColor="transparent"
+          translucent
+        />
+        {children}
+      </View>
+    </LinearGradient>
+  );
+};
+
+export default memo(Layout);

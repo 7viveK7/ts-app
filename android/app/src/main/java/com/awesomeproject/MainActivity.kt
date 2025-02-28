@@ -1,40 +1,49 @@
 package com.awesomeproject
 
-import android.os.Bundle // Import for Bundle
+import android.os.Bundle
+import android.view.View
+import android.view.WindowManager
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate
 import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint.fabricEnabled
 import com.facebook.react.defaults.DefaultReactActivityDelegate
-import org.devio.rn.splashscreen.SplashScreen // Import for SplashScreen
+import org.devio.rn.splashscreen.SplashScreen
 
 class MainActivity : ReactActivity() {
 
-    /**
-     * Show the splash screen before calling `super.onCreate()`.
-     */
     override fun onCreate(savedInstanceState: Bundle?) {
-        SplashScreen.show(this) // Show the splash screen
+        // Show the splash screen before loading the app
+        SplashScreen.show(this) 
+        
+        // Enable fullscreen mode and immersive gestures
+        setFullScreenMode()
+
         super.onCreate(savedInstanceState)
     }
 
-    /**
-     * Returns the name of the main component registered from JavaScript.
-     * This is used to schedule rendering of the component.
-     */
     override fun getMainComponentName(): String {
         return "AwesomeProject"
     }
 
-    /**
-     * Returns the instance of the [ReactActivityDelegate].
-     * We use [DefaultReactActivityDelegate] which allows you to enable
-     * New Architecture with a single boolean flag [fabricEnabled].
-     */
     override fun createReactActivityDelegate(): ReactActivityDelegate {
         return DefaultReactActivityDelegate(
             this,
             mainComponentName,
-            fabricEnabled
+            fabricEnabled ?: false // Handle null safety
         )
+    }
+
+    private fun setFullScreenMode() {
+        window.decorView.systemUiVisibility = (
+            View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+            or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+            or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+            or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+            or View.SYSTEM_UI_FLAG_FULLSCREEN
+            or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+        )
+
+        // Prevent the keyboard from pushing UI up
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
     }
 }

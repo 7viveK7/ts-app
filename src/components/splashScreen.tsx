@@ -8,7 +8,7 @@ import {
   Easing,
  
 } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
+// import LinearGradient from 'react-native-linear-gradient';
 
 const SplashScreen = () => {
   const letters = 'Achyver'.split('');
