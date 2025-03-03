@@ -1,20 +1,11 @@
 
 import React, { useEffect } from 'react';
-import { StyleSheet, Platform, SafeAreaView, StatusBar, View } from 'react-native';
+import { StyleSheet, Platform, StatusBar, View } from 'react-native';
 // import Layout from './src/components/Layout';
 import SplashScreen from 'react-native-splash-screen';
 import AppNavigator from './src/navigation/AppNavigations';
-import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
-// import Layout from "./Layout";
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-// const HeaderComponent = () => <Text style={styles.headerText}>Header</Text>;
-// const FooterComponent = () => <Text style={styles.footerText}>Footer</Text>;
-// const ContentComponent = () => (
-//   <View>
-//     <Text style={styles.contentText}>Welcome to the app!</Text>
-//     {/* <Button title="Click Me" onPress={() => alert("Button clicked!")} /> */}
-//   </View>
-// );
 
 const App = () => {
   //  const insets=useSafeAreaInsets()
@@ -35,11 +26,6 @@ const App = () => {
 };
 
 
-//   //return(
-//   <Layout header={<HeaderComponent />} footer={<FooterComponent />}>
-//   <ContentComponent />
-// </Layout>
-// )
 
 const styles = StyleSheet.create({
   container: {
